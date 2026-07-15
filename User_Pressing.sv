@@ -21,30 +21,28 @@
 
 
 module User_Pressing(
-    input logic BTNL,
-    input logic BTNC,
-    input logic BTNR,
+    input logic clk,
+    input logic reset,
+    input logic raw_press,
+    input logic [2:0] raw_selected_button,
     
-    output logic press_made,
+    output logic press_pulse,
     output logic [2:0] selected_button
     );
     
-    assign press_made = 0;
-    assign selected_button = 3'b000;
+    logic raw_press_prev;
     
-    always_comb begin
-        if (BTNL) begin
-            press_made = 1;
-            selected_button = 3'b100;
+    always_ff @(posedge clk) begin
+        if (reset) begin
+            press_pulse <= 0;
+            selected_button <= 3'b000;
         end
-        if (BTNC) begin
-            press_made = 1;
-            selected_button = 3'b010;
-        end
-        if (BTNR) begin
-            press_made = 1;
-            selected_button = 3'b001;
+        else begin
+            raw_press_prev <= raw_press; //sets on the next clock cycle
+            press_pulse <= raw_press && !raw_press_prev;
+            if (raw_press && !raw_press_prev) begin
+                selected_button <= raw_selected_button;
+            end
         end
     end
-          
 endmodule
