@@ -25,7 +25,12 @@ module Game_Control(
     input logic reset,
     input logic start,
     input logic level_pass,
-    output logic game_state
+    input logic sequence_done,
+    input logic press_made,
+    input logic press_correct,
+    input logic round_complete,
+    
+    output logic [2:0] game_state
     );
 
     typedef enum logic [2:0] {
@@ -43,7 +48,7 @@ module Game_Control(
         if (reset) begin
             state_curr <= pregame;
         end
-        else if (clk) begin //only update on positive edge of the clock, think about other variables later
+        else begin //only update on positive edge of the clock, think about other variables later
             state_curr <= state_next;
         end
      end
@@ -58,20 +63,46 @@ module Game_Control(
                     state_next = pregame;
                 end
             end
-            simon_talking : state_next = user_pressing;
-            user_pressing : state_next = check;
-            check : begin
-                if(level_pass) begin
+            simon_talking : begin
+                if (sequence_done) begin
+                        state_next = user_pressing;
+                end
+                else begin
                     state_next = simon_talking;
+                end
+            end
+            user_pressing : begin
+                if (press_made) begin
+                    state_next = check;
+                end
+                else begin
+                    state_next = user_pressing;
+                end
+            end
+            check : begin
+                if (!press_correct) begin
+                    state_next = game_over;
+                end
+                else if (round_complete) begin
+                    state_next = simon_talking;
+                end
+                else begin
+                    state_next = user_pressing;
+                end
+            end 
+            game_over : begin
+                if (press_made) begin
+                    state_next = pregame;
                 end
                 else begin
                     state_next = game_over;
                 end
-             end
-             
-             game_over : state_next = game_over;
-             default : state_next = pregame;
-         endcase
-    end
-    
+            end
+            
+      endcase
+  end
+  
+  
+  assign game_state = state_curr;         
+                            
 endmodule

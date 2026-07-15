@@ -25,29 +25,44 @@ module Simon_Top(
     input logic reset,
     input logic BTNC,
     
-    output led0_top, //LD 17
-    output led1_top //LD 16
+    output logic led0_top, //LD 17
+    output logic led1_top //LD 16
     );
     
+    //clock divider for Simon Talking
+    logic clock_div;
+    
+    //game control
     logic [2:0] game_state;
+    
+    //pregame
     logic pregame_start;
     logic [2:0] pregame_led0;
     logic [2:0] pregame_led1;
+    
+    clk_divider u_divider (
+    .clk(clk),
+    .reset(reset),
+    .clock_div(clock_div)
+    );
     
     Game_Control u_game_control (
     .clk(clk),
     .reset(reset),
     .start(pregame_start),
-    .
-    
-    )
+    .level_pass(),
+    .sequence_done(),
+    .press_made(),
+    .press_correct(),
+    .round_complete()
+    );
     
     Pregame u_pregame (
-    .start_button(BTNC)
-    .start(pregame_start)
-    .led0(pregame_led0)
+    .start_button(BTNC),
+    .start(pregame_start),
+    .led0(pregame_led0),
     .led1(pregame_led1)
-    )
+    );
     
     always_comb begin
         if (game_state == 3'b000) begin
@@ -60,5 +75,4 @@ module Simon_Top(
         end
     end
     
-    module Pregame 
 endmodule

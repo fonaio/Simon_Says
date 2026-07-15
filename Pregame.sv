@@ -22,27 +22,22 @@
 
 module Pregame(
 
-    input logic clk,
     input logic start_button,
-    
+
     output logic start,
-    output logic start_LED,
-    output logic rgb_r,
-    output logic rgb_g,
-    output logic rgb_b
+    output logic [2:0] led0, // {rgb}
+    output logic [2:0] led1 
     
     );
     
     always_comb begin
         start = 0;
-        rgb_r = 1'b0;
-        rgb_g = 1'b1;
-        rgb_b = 1'b0;
+        led0 = 3'b010;
+        led1 = 3'b010;
         
         if (start_button) begin
-            rgb_r = 1'b0;
-            rgb_g = 1'b0;
-            rgb_b = 1'b0;
+            led0 = 3'b000;
+            led1 = 3'b000;
             start = 1;
         end
     end
