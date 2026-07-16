@@ -7,4 +7,4 @@
 # Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
 #
 
-vivado -log Game_Control.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Game_Control.tcl
+vivado -log Simon_Top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Simon_Top.tcl

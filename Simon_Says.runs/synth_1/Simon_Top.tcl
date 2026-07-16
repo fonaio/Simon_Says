@@ -4,7 +4,7 @@
 
 set TIME_start [clock seconds] 
 namespace eval ::optrace {
-  variable script "/home/user/Projects/Simon_Says/Simon_Says.runs/synth_1/Game_Control.tcl"
+  variable script "/home/user/Projects/Simon_Says/Simon_Says.runs/synth_1/Simon_Top.tcl"
   variable category "vivado_synth"
 }
 
@@ -72,7 +72,13 @@ set_property ip_output_repo /home/user/Projects/Simon_Says/Simon_Says.cache/ip [
 set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
-read_verilog -library xil_defaultlib -sv /home/user/Projects/Simon_Says/Simon_Says.srcs/sources_1/new/Game_Control.sv
+read_verilog -library xil_defaultlib -sv {
+  /home/user/Projects/Simon_Says/Simon_Says.srcs/sources_1/new/Game_Control.sv
+  /home/user/Projects/Simon_Says/Pregame.sv
+  /home/user/Projects/Simon_Says/User_Pressing.sv
+  /home/user/Projects/Simon_Says/clk_divider.sv
+  /home/user/Projects/Simon_Says/Simon_Top.sv
+}
 OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -82,11 +88,14 @@ OPTRACE "Adding files" END { }
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
+read_xdc /home/user/Projects/Simon_Says/Simon_Says.srcs/constrs_1/imports/Projects/Nexys-A7-100T-Master.xdc
+set_property used_in_implementation false [get_files /home/user/Projects/Simon_Says/Simon_Says.srcs/constrs_1/imports/Projects/Nexys-A7-100T-Master.xdc]
+
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
-synth_design -top Game_Control -part xc7a100tcsg324-1
+synth_design -top Simon_Top -part xc7a100tcsg324-1
 OPTRACE "synth_design" END { }
 if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
  send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
@@ -96,10 +105,10 @@ if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
 OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef Game_Control.dcp
+write_checkpoint -force -noxdef Simon_Top.dcp
 OPTRACE "write_checkpoint" END { }
 OPTRACE "synth reports" START { REPORT }
-generate_parallel_reports -reports { "report_utilization -file Game_Control_utilization_synth.rpt -pb Game_Control_utilization_synth.pb"  } 
+generate_parallel_reports -reports { "report_utilization -file Simon_Top_utilization_synth.rpt -pb Simon_Top_utilization_synth.pb"  } 
 OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

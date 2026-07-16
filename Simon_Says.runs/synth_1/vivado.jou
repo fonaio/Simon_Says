@@ -3,11 +3,11 @@
 # SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
 # IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
 # SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-# Start of session at: Tue Jul 14 20:53:34 2026
-# Process ID: 60469
+# Start of session at: Thu Jul 16 20:51:30 2026
+# Process ID: 51047
 # Current directory: /home/user/Projects/Simon_Says/Simon_Says.runs/synth_1
-# Command line: vivado -log Game_Control.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Game_Control.tcl
-# Log file: /home/user/Projects/Simon_Says/Simon_Says.runs/synth_1/Game_Control.vds
+# Command line: vivado -log Simon_Top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Simon_Top.tcl
+# Log file: /home/user/Projects/Simon_Says/Simon_Says.runs/synth_1/Simon_Top.vds
 # Journal file: /home/user/Projects/Simon_Says/Simon_Says.runs/synth_1/vivado.jou
 # Running On        :ab38a3d94a0c
 # Platform          :Ubuntu
@@ -19,6 +19,6 @@
 # Host memory       :16748 MB
 # Swap memory       :4294 MB
 # Total Virtual     :21043 MB
-# Available Virtual :16707 MB
+# Available Virtual :17035 MB
 #-----------------------------------------------------------
-source Game_Control.tcl -notrace
+source Simon_Top.tcl -notrace

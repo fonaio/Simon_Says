@@ -1,16 +1,26 @@
-
-*** Running vivado
-    with args -log Simon_Top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Simon_Top.tcl
-
-
-****** Vivado v2024.1 (64-bit)
-  **** SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
-  **** IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
-  **** SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
-  **** Start of session at: Thu Jul 16 20:51:30 2026
-    ** Copyright 1986-2022 Xilinx, Inc. All Rights Reserved.
-    ** Copyright 2022-2024 Advanced Micro Devices, Inc. All Rights Reserved.
-
+#-----------------------------------------------------------
+# Vivado v2024.1 (64-bit)
+# SW Build 5076996 on Wed May 22 18:36:09 MDT 2024
+# IP Build 5075265 on Wed May 22 21:45:21 MDT 2024
+# SharedData Build 5076995 on Wed May 22 18:29:18 MDT 2024
+# Start of session at: Thu Jul 16 20:51:30 2026
+# Process ID: 51047
+# Current directory: /home/user/Projects/Simon_Says/Simon_Says.runs/synth_1
+# Command line: vivado -log Simon_Top.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source Simon_Top.tcl
+# Log file: /home/user/Projects/Simon_Says/Simon_Says.runs/synth_1/Simon_Top.vds
+# Journal file: /home/user/Projects/Simon_Says/Simon_Says.runs/synth_1/vivado.jou
+# Running On        :ab38a3d94a0c
+# Platform          :Ubuntu
+# Operating System  :Ubuntu 22.04.5 LTS
+# Processor Detail  :VirtualApple @ 2.50GHz
+# CPU Frequency     :2502.057 MHz
+# CPU Physical cores:8
+# CPU Logical cores :8
+# Host memory       :16748 MB
+# Swap memory       :4294 MB
+# Total Virtual     :21043 MB
+# Available Virtual :17035 MB
+#-----------------------------------------------------------
 source Simon_Top.tcl -notrace
 create_project: Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 2029.848 ; gain = 83.008 ; free physical = 10319 ; free virtual = 16377
 Command: synth_design -top Simon_Top -part xc7a100tcsg324-1

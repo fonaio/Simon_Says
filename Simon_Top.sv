@@ -15,7 +15,7 @@
 // 
 // Revision:
 // Revision 0.01 - File Created
-// Additional Comments:
+// Additional Comments:i
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -27,8 +27,8 @@ module Simon_Top(
     input logic BTNC,
     input logic BTNR,
     
-    output logic led0_top, //LD 17
-    output logic led1_top //LD 16
+    output logic [2:0] led0_top, //LD 17
+    output logic [2:0] led1_top //LD 16
     );
     
     //clock divider for Simon Talking
@@ -47,8 +47,6 @@ module Simon_Top(
     logic [2:0] raw_selected_button;
     logic press_pulse;
     logic [2:0] selected_button;
-    
-    
     
     clk_divider u_divider (
     .clk(clk),
