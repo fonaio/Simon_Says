@@ -1,22 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
 // Engineer: 
 // 
-// Create Date: 07/10/2026 09:01:02 PM
-// Design Name: 
+// Create Date: 07/01/2026 06:27:16 PM
+
 // Module Name: LED_Randomizer
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Project Name: Simon_Says
+// Description: Chooses a random LED to turn on when Simon is talking
 //////////////////////////////////////////////////////////////////////////////////
 
 

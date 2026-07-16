@@ -1,22 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
 // Engineer: 
 // 
-// Create Date: 07/10/2026 08:23:30 PM
-// Design Name: 
+// Create Date: 07/01/2026 06:27:16 PM
+
 // Module Name: clk_divider
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Project Name: Simon_Says
+// Description: Paces Simon's talking to occur every 2^27 clock cycles (a little less than a second) 
 //////////////////////////////////////////////////////////////////////////////////
 
 
@@ -29,7 +19,7 @@ module clk_divider( //Nexys A7 uses 100 MHz (100 million times/second)
     
     logic[26:0] count = 27'b0; // 27th bit switches after 2^(26) pulses pass
     
-    always_ff @ (posedge clk or reset) begin 
+    always_ff @ (posedge clk or posedge reset) begin 
         if (reset) begin
             count <= 27'b0;
         end

@@ -1,22 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
 // Engineer: 
 // 
-// Create Date: 07/10/2026 05:56:43 PM
-// Design Name: 
+// Create Date: 07/01/2026 06:27:16 PM
+
 // Module Name: Pregame
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
-// 
+// Project Name: Simon_Says
+// Description: Sets 2 Tricolor LEDs to be green until the game starts. After the game starts, LEDs turn off.
 //////////////////////////////////////////////////////////////////////////////////
 
 

@@ -1,21 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
 // Engineer: 
 // 
-// Create Date: 07/15/2026 06:51:43 PM
-// Design Name: 
+// Create Date: 07/01/2026 06:27:16 PM
+
 // Module Name: User_Pressing
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:
+// Project Name: Simon_Says
+// Description: Determines if the user has pressed the button using edge detection by comparing the button press status of current and previous cycle
 // 
 //////////////////////////////////////////////////////////////////////////////////
 

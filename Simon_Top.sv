@@ -1,21 +1,12 @@
 `timescale 1ns / 1ps
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
 // Engineer: 
 // 
-// Create Date: 07/15/2026 01:43:20 AM
-// Design Name: 
+// Create Date: 07/01/2026 06:27:16 PM
+
 // Module Name: Simon_Top
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
-// 
-// Dependencies: 
-// 
-// Revision:
-// Revision 0.01 - File Created
-// Additional Comments:i
+// Project Name: Simon_Says
+// Description: Top level module for Simon says 
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -48,6 +39,11 @@ module Simon_Top(
     logic press_pulse;
     logic [2:0] selected_button;
     
+    //LED_Randomizer
+    logic [1:0] randout;
+    logic seeden;
+    
+    
     clk_divider u_divider (
     .clk(clk),
     .reset(reset),
@@ -60,9 +56,10 @@ module Simon_Top(
     .start(pregame_start),
     .level_pass(),
     .sequence_done(),
-    .press_made(),
+    .press_made(press_pulse),
     .press_correct(),
-    .round_complete()
+    .round_complete(),
+    .current_state(game_state)
     );
     
     Pregame u_pregame (
@@ -81,7 +78,18 @@ module Simon_Top(
     .selected_button(selected_button)
     );
     
+    Led_Randomizer u_randomizer(
+    .clk(clk),
+    .reset(reset),
+    .seed_en(seed_en)
+    );
+    
     always_comb begin
+        led0_top = 3'b000;
+        led1_top = 3'b000;
+        raw_press = 1'b0;
+        raw_selected_button = 3'b000;
+        
         if (game_state == 3'b000) begin //pregame
             led0_top = pregame_led0;
             led1_top = pregame_led1;
