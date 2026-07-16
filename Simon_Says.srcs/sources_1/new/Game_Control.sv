@@ -14,7 +14,7 @@
 module Game_Control(
     input logic clk,
     input logic reset,
-    input logic start,
+    input logic game_start,
     input logic level_pass,
     input logic sequence_done,
     input logic press_made,
@@ -47,7 +47,7 @@ module Game_Control(
     always_comb begin
         case (state_curr)
             pregame : begin
-                if (start) begin
+                if (game_start) begin
                     state_next = simon_talking;
                 end
                 else begin

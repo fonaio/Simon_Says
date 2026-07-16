@@ -64,7 +64,7 @@ module Simon_Top(
     
     Pregame u_pregame (
     .start_button(BTNC),
-    .start(pregame_start),
+    .game_start(pregame_start),
     .led0(pregame_led0),
     .led1(pregame_led1)
     );

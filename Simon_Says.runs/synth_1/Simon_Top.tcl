@@ -74,7 +74,7 @@ OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
   /home/user/Projects/Simon_Says/Simon_Says.srcs/sources_1/new/Game_Control.sv
-  /home/user/Projects/Simon_Says/Pregame.sv
+  /home/user/Projects/Simon_Says/LED_Randomizer.sv
   /home/user/Projects/Simon_Says/User_Pressing.sv
   /home/user/Projects/Simon_Says/clk_divider.sv
   /home/user/Projects/Simon_Says/Simon_Top.sv
@@ -92,6 +92,8 @@ read_xdc /home/user/Projects/Simon_Says/Simon_Says.srcs/constrs_1/imports/Projec
 set_property used_in_implementation false [get_files /home/user/Projects/Simon_Says/Simon_Says.srcs/constrs_1/imports/Projects/Nexys-A7-100T-Master.xdc]
 
 set_param ips.enableIPCacheLiteLoad 1
+
+read_checkpoint -auto_incremental -incremental /home/user/Projects/Simon_Says/Simon_Says.srcs/utils_1/imports/synth_1/Simon_Top.dcp
 close [open __synthesis_is_running__ w]
 
 OPTRACE "synth_design" START { }
