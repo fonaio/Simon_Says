@@ -22,9 +22,6 @@ module Simon_Top(
     output logic [2:0] led1_top //LD 16
     );
     
-    //clock divider for Simon Talking
-    logic clock_div;
-    
     //game control
     logic [2:0] game_state;
     
@@ -32,6 +29,8 @@ module Simon_Top(
     logic pregame_start;
     logic [2:0] pregame_led0;
     logic [2:0] pregame_led1;
+    logic [4:0] mem_index;
+    logic is_writing;
     
     //user_pressing
     logic raw_press;
@@ -42,6 +41,12 @@ module Simon_Top(
     //LED_Randomizer
     logic [1:0] randout;
     logic seeden;
+    
+    //Simon_Brain
+    logic led_seq;
+    
+    //clock divider for Simon Talking
+    logic clock_div;
     
     
     clk_divider u_divider (
@@ -63,7 +68,11 @@ module Simon_Top(
     );
     
     Pregame u_pregame (
+    .clk(clk),
+    .reset(reset),
     .start_button(BTNC),
+    .memindex(mem_index),
+    .is_writing(is_writing),
     .game_start(pregame_start),
     .led0(pregame_led0),
     .led1(pregame_led1)
@@ -84,6 +93,15 @@ module Simon_Top(
     .seed_en(seed_en)
     );
     
+    Simon_Brain u_brain(
+    .clk(clk),
+    .reset(reset),
+    .led_randomizer_value(randout),
+    .need_new(is_writing),
+    .curr_index(mem_index),
+    //led_sequence() 
+    );
+    
     Simon_Talking u_talking(
     //insert stuff here
     );
@@ -100,13 +118,13 @@ module Simon_Top(
         raw_press = 1'b0;
         raw_selected_button = 3'b000;
         
-        if (game_state == 3'b000) begin //pregame
+        if (game_state == 3'b000) begin //pregame 
             led0_top = pregame_led0;
-            led1_top = pregame_led1;
+            led1_top = pregame_led1; // note- we will probably have to do pregame + recieved signal now for LED logic
         end
         else begin
             led0_top = 3'b000;
-            led1_top = 3'b000;
+            led1_top = 3'b000; 
         end
         
         if(game_state == 3'b010) begin //user pressing 

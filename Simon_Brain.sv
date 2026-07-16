@@ -28,7 +28,7 @@ module Simon_Brain(
     
     always_ff @(posedge clk) begin
         if (reset) begin
-            memory = '{default: 0}; //clears array upon reset
+            memory <= '{default: 0}; //clears array upon reset
         end
         else if (need_new) begin
             memory[curr_index] = led_randomizer_value;
