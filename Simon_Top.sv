@@ -84,6 +84,16 @@ module Simon_Top(
     .seed_en(seed_en)
     );
     
+    Simon_Talking u_talking(
+    //insert stuff here
+    );
+    
+    Checking u_checking(
+    //insert stuff here
+    );
+    
+    
+    
     always_comb begin
         led0_top = 3'b000;
         led1_top = 3'b000;
