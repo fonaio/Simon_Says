@@ -29,8 +29,8 @@ module Simon_Top(
     logic pregame_start;
     logic [2:0] pregame_led0;
     logic [2:0] pregame_led1;
-    logic [4:0] mem_index;
-    logic is_writing;
+    logic [4:0] curr_index;
+    logic allow_write;
     
     //user_pressing
     logic raw_press;
@@ -57,14 +57,14 @@ module Simon_Top(
     
     Game_Control u_game_control (
     .clk(clk),
-    .reset(reset),
-    .start(pregame_start),
-    .level_pass(),
-    .sequence_done(),
-    .press_made(press_pulse),
-    .press_correct(),
-    .round_complete(),
-    .current_state(game_state)
+    .reset(reset),          
+    .start(pregame_start),      //pregame
+    .level_pass(),              //checking_input
+    .sequence_done(),           //simon_talking
+    .press_made(press_pulse),   //user_pressing
+    .press_correct(),           //checking_input
+    .round_complete(),          //checking_input
+    .current_state(game_state)  
     );
     
     Pregame u_pregame (
@@ -72,7 +72,7 @@ module Simon_Top(
     .reset(reset),
     .start_button(BTNC),
     .memindex(mem_index),
-    .is_writing(is_writing),
+    .allow_write(allow_write),
     .game_start(pregame_start),
     .led0(pregame_led0),
     .led1(pregame_led1)
@@ -87,7 +87,7 @@ module Simon_Top(
     .selected_button(selected_button)
     );
     
-    Led_Randomizer u_randomizer(
+    LED_Randomizer u_randomizer(
     .clk(clk),
     .reset(reset),
     .seed_en(seed_en)
@@ -97,16 +97,16 @@ module Simon_Top(
     .clk(clk),
     .reset(reset),
     .led_randomizer_value(randout),
-    .need_new(is_writing),
-    .curr_index(mem_index),
-    //led_sequence() 
+    .allow_write(allow_write),
+    .curr_index(curr_index)
+    //led_sequence() from Simon Talking
     );
     
-    Simon_Talking u_talking(
+    //Simon_Talking u_talking(
     //insert stuff here
-    );
+    //);
     
-    Checking u_checking(
+    Checking_Input u_checking(
     //insert stuff here
     );
     

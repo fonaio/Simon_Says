@@ -16,7 +16,7 @@ module Simon_Brain(
     input logic clk,
     input logic reset,
     input logic [2:0] led_randomizer_value,
-    input logic need_new,
+    input logic allow_write,
     input logic [4:0] curr_index,
     
     output logic [2:0] led_sequence
@@ -30,7 +30,7 @@ module Simon_Brain(
         if (reset) begin
             memory <= '{default: 0}; //clears array upon reset
         end
-        else if (need_new) begin
+        else if (allow_write) begin
             memory[curr_index] = led_randomizer_value;
         end
     end

@@ -16,12 +16,11 @@ module Pregame(
     input logic reset,
     input logic start_button,
     
-    output logic [4:0] memindex, //brain
-    output logic is_writing,
-    output logic game_start, //user has pressed start
+    output logic [4:0] curr_index, //brain
+    output logic allow_write,
+    output logic pregame_start, //user has pressed start
     output logic [2:0] led0, // {rgb}
     output logic [2:0] led1 
-    
     );
     
     typedef enum logic [1:0]{
@@ -35,9 +34,9 @@ module Pregame(
     always_ff @(posedge clk) begin
         if (reset) begin
             state <= filling;
-            memindex <= 0;
-            is_writing <= 0;
-            game_start <= 0;
+            curr_index <= 0;
+            allow_write <= 0;
+            pregame_start <= 0;
             led0 <= 3'b0;
             led1 <= 3'b0;
         end
@@ -46,13 +45,13 @@ module Pregame(
             led1 <= 3'b0;
             case(state)
                 filling : begin
-                is_writing <=1;
-                    if (memindex == 5'b11101) begin //index 29
+                    allow_write <=1;
+                    if (curr_index == 5'b11101) begin //index 29
                         state <= ready;
-                        is_writing <= 0;
+                        allow_write <= 0;
                     end
                     else begin
-                        memindex <= memindex + 1;
+                        curr_index <= curr_index + 1;
                     end
                 end
                 ready : begin
@@ -60,7 +59,7 @@ module Pregame(
                     led1 <= 3'b010;
                     if (start_button) begin
                         state <= running;
-                        game_start <= 1;
+                        pregame_start <= 1;
                     end
                 end
              endcase

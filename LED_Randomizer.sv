@@ -27,7 +27,7 @@ module LED_Randomizer(
     
     always_ff @(posedge clk or reset) begin
         if (reset) begin
-            lfsr_reg <=8'b1000_0001;
+            lfsr_reg <= 8'b1000_0001;
             randout <= 2'b00;
         end
         else begin //do a LFSR every clock cycle
