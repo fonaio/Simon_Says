@@ -20,20 +20,20 @@ module Checking_Input(
     input logic [4:0] current_level,
     
     output logic [4:0] check_index, //highest index of array we have to check
-    output logic level_complete,
+    output logic round_complete,
     output logic game_over
     );
  
     always_ff @(posedge clk) begin
         if (reset) begin
             check_index = 5'b0;
-            level_complete = 0;
+            round_complete = 0;
             game_over = 0;
         end
         else if (press_pulse) begin
             if(selected_button == led_sequence) begin
                 if (check_index == current_level) begin
-                    level_complete <= 1;
+                    round_complete <= 1;
                 end
                 else begin 
                     check_index <= check_index + 1;

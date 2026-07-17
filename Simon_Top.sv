@@ -48,6 +48,11 @@ module Simon_Top(
     //clock divider for Simon Talking
     logic clock_div;
     
+    //Checking_Input
+    logic check_index;
+    logic round_complete;
+    logic game_over;
+    
     
     clk_divider u_divider (
     .clk(clk),
@@ -62,8 +67,8 @@ module Simon_Top(
     .level_pass(),              //checking_input
     .sequence_done(),           //simon_talking
     .press_made(press_pulse),   //user_pressing
-    .press_correct(),           //checking_input
-    .round_complete(),          //checking_input
+    .press_correct(game_over),  //checking_input: if press is correct, game over is false
+    .round_complete(round_complete),          //checking_input
     .current_state(game_state)  
     );
     
@@ -107,7 +112,12 @@ module Simon_Top(
     //);
     
     Checking_Input u_checking(
-    //insert stuff here
+    .clk(clk),
+    .reset(reset),
+    .selected_button(selected_button), //user pressing
+    .press_pulse(press_pulse), //user pressing
+    .led_sequence(led_seq),
+    .current_level(check_index)
     );
     
     
