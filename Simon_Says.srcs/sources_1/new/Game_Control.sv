@@ -15,7 +15,6 @@ module Game_Control(
     input logic clk,
     input logic reset,
     input logic game_start,
-    input logic level_pass,
     input logic sequence_done,
     input logic press_made,
     input logic press_correct,

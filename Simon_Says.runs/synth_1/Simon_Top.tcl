@@ -73,10 +73,14 @@ set_property ip_cache_permissions {read write} [current_project]
 OPTRACE "Creating in-memory project" END { }
 OPTRACE "Adding files" START { }
 read_verilog -library xil_defaultlib -sv {
+  /home/user/Projects/Simon_Says/Checking_Input.sv
   /home/user/Projects/Simon_Says/Simon_Says.srcs/sources_1/new/Game_Control.sv
   /home/user/Projects/Simon_Says/LED_Randomizer.sv
+  /home/user/Projects/Simon_Says/Pregame.sv
+  /home/user/Projects/Simon_Says/Simon_Brain.sv
   /home/user/Projects/Simon_Says/User_Pressing.sv
   /home/user/Projects/Simon_Says/clk_divider.sv
+  /home/user/Projects/Simon_Says/game_over.sv
   /home/user/Projects/Simon_Says/Simon_Top.sv
 }
 OPTRACE "Adding files" END { }

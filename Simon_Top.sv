@@ -50,9 +50,7 @@ module Simon_Top(
     
     //Checking_Input
     logic check_index;
-    logic round_complete;
-    logic game_over;
-    
+    logic round_complete;    
     
     clk_divider u_divider (
     .clk(clk),
@@ -63,12 +61,12 @@ module Simon_Top(
     Game_Control u_game_control (
     .clk(clk),
     .reset(reset),          
-    .start(pregame_start),              //pregame
+    .game_start(pregame_start),              //pregame
     .sequence_done(),                   //simon_talking
     .press_made(press_pulse),           //user_pressing
     .press_correct(press_correct),      //checking input
     .round_complete(round_complete),    //checking input
-    .current_state(game_state)  
+    .game_state(game_state)  
     );
     
     Pregame u_pregame (
@@ -102,8 +100,8 @@ module Simon_Top(
     .reset(reset),
     .led_randomizer_value(randout),
     .allow_write(allow_write),
-    .curr_index(curr_index)
-    //led_sequence() from Simon Talking
+    .curr_index(curr_index),
+    .led_sequence() //read array
     );
     
     //Simon_Talking u_talking(
@@ -122,7 +120,7 @@ module Simon_Top(
     game_over u_game_over(
     .clk(clk),
     .reset(reset),
-    .game_over(press_correct) //from check
+    .press_correct(press_correct) //from check
     );
     
     always_comb begin
