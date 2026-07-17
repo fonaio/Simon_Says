@@ -13,16 +13,35 @@
 
 module Checking_Input(
     input logic clk,
-    input logic rst,
-    input logic [2:0] selected_button,
-    input logic press_pulse,
-    input logic [4:0] curr_index, 
+    input logic reset,
+    input logic [2:0] selected_button, //BTNC/L/R
+    input logic press_pulse, //if a button press was detected
+    input logic [2:0] led_sequence,//correct value 
+    input logic [4:0] current_level,
     
-    output logic press_correct,
-    output logic level_pass
+    output logic [4:0] check_index, //highest index of array we have to check
+    output logic level_complete,
+    output logic game_over
     );
-    
-    logic counter = 0; //highest index of the array we have to check
-    
-    
+ 
+    always_ff @(posedge clk) begin
+        if (reset) begin
+            check_index = 5'b0;
+            level_complete = 0;
+            game_over = 0;
+        end
+        else if (press_pulse) begin
+            if(selected_button == led_sequence) begin
+                if (check_index == current_level) begin
+                    level_complete <= 1;
+                end
+                else begin 
+                    check_index <= check_index + 1;
+                end
+            end
+            else begin
+                game_over = 1;
+            end
+        end
+    end
 endmodule
