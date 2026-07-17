@@ -63,12 +63,11 @@ module Simon_Top(
     Game_Control u_game_control (
     .clk(clk),
     .reset(reset),          
-    .start(pregame_start),      //pregame
-    .level_pass(),              //checking_input
-    .sequence_done(),           //simon_talking
-    .press_made(press_pulse),   //user_pressing
-    .press_correct(game_over),  //checking_input: if press is correct, game over is false
-    .round_complete(round_complete),          //checking_input
+    .start(pregame_start),              //pregame
+    .sequence_done(),                   //simon_talking
+    .press_made(press_pulse),           //user_pressing
+    .press_correct(press_correct),      //checking input
+    .round_complete(round_complete),    //checking input
     .current_state(game_state)  
     );
     
@@ -120,7 +119,11 @@ module Simon_Top(
     .current_level(check_index)
     );
     
-    
+    game_over u_game_over(
+    .clk(clk),
+    .reset(reset),
+    .game_over(press_correct) //from check
+    );
     
     always_comb begin
         led0_top = 3'b000;

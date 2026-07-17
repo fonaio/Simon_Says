@@ -14,7 +14,7 @@
 module game_over(
     input logic clk, 
     input logic reset,
-    input logic game_over,
+    input logic press_correct,
     
     output logic [2:0] led0,
     output logic [2:0] led1
@@ -25,7 +25,7 @@ module game_over(
             led0 = 3'b0;
             led1 = 3'b0;
         end
-        else if (game_over) begin
+        else if (!press_correct) begin
             led0 = 3'b100;
             led1 = 3'b100;
         end
