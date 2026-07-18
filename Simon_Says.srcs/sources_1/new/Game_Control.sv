@@ -17,7 +17,7 @@ module Game_Control(
     input logic game_start,
     input logic sequence_done,
     input logic press_made,
-    input logic press_correct,
+    input logic [1:0] press_correct,
     input logic round_complete,
     
     output logic [2:0] game_state
@@ -70,7 +70,7 @@ module Game_Control(
                 end
             end
             check : begin
-                if (!press_correct) begin
+                if (press_correct == 3'b0) begin
                     state_next = game_over;
                 end
                 else if (round_complete) begin

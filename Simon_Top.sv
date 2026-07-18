@@ -50,7 +50,8 @@ module Simon_Top(
     
     //Checking_Input
     logic check_index;
-    logic round_complete;    
+    logic round_complete;
+    logic press_status;    
     
     clk_divider u_divider (
     .clk(clk),
@@ -73,7 +74,7 @@ module Simon_Top(
     .clk(clk),
     .reset(reset),
     .start_button(BTNC),
-    .memindex(mem_index),
+    .curr_index(mem_index),
     .allow_write(allow_write),
     .game_start(pregame_start),
     .led0(pregame_led0),
@@ -120,7 +121,7 @@ module Simon_Top(
     game_over u_game_over(
     .clk(clk),
     .reset(reset),
-    .press_correct(press_correct) //from check
+    .game_state(game_state) //from game_controls
     );
     
     always_comb begin
