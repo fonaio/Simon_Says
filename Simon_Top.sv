@@ -48,10 +48,13 @@ module Simon_Top(
     //clock divider for Simon Talking
     logic clock_div;
     
+    //Simon Talking
+    logic current_level;
+    
     //Checking_Input
     logic check_index;
     logic round_complete;
-    logic press_status;    
+    logic press_status;
     
     clk_divider u_divider (
     .clk(clk),
@@ -93,7 +96,8 @@ module Simon_Top(
     LED_Randomizer u_randomizer(
     .clk(clk),
     .reset(reset),
-    .seed_en(seed_en)
+    .seed_en(seed_en),
+    .randout(randout)
     );
     
     Simon_Brain u_brain(
@@ -115,7 +119,10 @@ module Simon_Top(
     .selected_button(selected_button), //user pressing
     .press_pulse(press_pulse), //user pressing
     .led_sequence(led_seq),
-    .current_level(check_index)
+    .current_level(current_level),
+    .check_index(check_index),
+    .round_complete(round_complete),
+    .press_status(press_status)
     );
     
     game_over u_game_over(
@@ -138,6 +145,12 @@ module Simon_Top(
             led0_top = 3'b000;
             led1_top = 3'b000; 
         end
+        
+        
+        if(game_state == 3'b001) begin //simon talking
+            
+        end
+        
         
         if(game_state == 3'b010) begin //user pressing 
             raw_press = BTNL || BTNC || BTNR;

@@ -45,7 +45,7 @@ module Pregame(
             led1 <= 3'b0;
             case(state)
                 filling : begin
-                    allow_write <=1;
+                    allow_write <= 1;
                     if (curr_index == 5'b11101) begin //index 29
                         state <= ready;
                         allow_write <= 0;
