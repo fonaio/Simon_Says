@@ -17,9 +17,9 @@ module Checking_Input(
     input logic [2:0] selected_button, //BTNC/L/R
     input logic press_pulse, //if a button press was detected
     input logic [2:0] led_sequence,//correct value 
-    input logic [4:0] current_level,
+    input logic [4:0] current_level, //higheset index of array we have to check
     
-    output logic [4:0] check_index, //highest index of array we have to check
+    output logic [4:0] check_index, //the current index we are checking
     output logic round_complete,
     output logic [1:0] press_status //possible statuses same as state: 00-idle, 01, correct, 10, incorrect
     );

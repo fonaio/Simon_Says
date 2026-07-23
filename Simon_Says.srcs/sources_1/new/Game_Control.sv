@@ -20,7 +20,8 @@ module Game_Control(
     input logic [1:0] press_correct,
     input logic round_complete,
     
-    output logic [2:0] game_state
+    output logic [2:0] game_state,
+    output logic [4:0] current_level
     );
 
     typedef enum logic [2:0] {
@@ -37,9 +38,13 @@ module Game_Control(
      always_ff @(posedge clk or posedge reset) begin
         if (reset) begin
             state_curr <= pregame;
+            current_level <= 5'b00000;
         end
-        else begin //only update on positive edge of the clock, think about other variables later
+        else begin //only update on positive edge of the clock
             state_curr <= state_next;
+            if (state_curr == check && round_complete) begin
+                current_level <= current_level + 1;
+            end
         end
      end
         
