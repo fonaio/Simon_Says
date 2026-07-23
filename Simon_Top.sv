@@ -72,7 +72,7 @@ module Simon_Top(
     .game_start(pregame_start),              //pregame
     .sequence_done(sequence_done),          //simon_talking
     .press_made(press_pulse),               //user_pressing
-    .press_correct(press_correct),          //checking input
+    .press_correct(press_status),          //checking input
     .round_complete(round_complete),        //checking input
     .game_state(game_state),                //output
     .current_level(current_level)           //output
