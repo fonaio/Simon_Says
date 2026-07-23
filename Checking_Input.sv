@@ -40,13 +40,13 @@ module Checking_Input(
             state <= idle;
         end
         else begin
-            round_complete = 0;
+            round_complete <= 0;
             case (state)
                 idle : begin
                     if (press_pulse) begin
                         if (selected_button == led_sequence) begin
                             if (current_level == check_index) begin
-                                round_complete = 1;
+                                round_complete <= 1;
                             end
                             else begin
                                 check_index <= check_index + 1;

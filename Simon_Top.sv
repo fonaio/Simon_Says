@@ -19,7 +19,8 @@ module Simon_Top(
     input logic BTNR,
     
     output logic [2:0] led0_top, //LD 17
-    output logic [2:0] led1_top //LD 16
+    output logic [2:0] led1_top, //LD 16
+    output logic [2:0] simon_led
     );
     
     //game control
