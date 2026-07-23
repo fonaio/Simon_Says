@@ -79,7 +79,7 @@ module Simon_Top(
     .start_button(BTNC),
     .curr_index(mem_index),
     .allow_write(allow_write),
-    .game_start(pregame_start),
+    .pregame_start(pregame_start),
     .led0(pregame_led0),
     .led1(pregame_led1)
     );
@@ -145,7 +145,6 @@ module Simon_Top(
             led0_top = 3'b000;
             led1_top = 3'b000; 
         end
-        
         
         if(game_state == 3'b001) begin //simon talking
             

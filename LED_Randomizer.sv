@@ -25,7 +25,7 @@ module LED_Randomizer(
     
     assign feedback = lfsr_reg[7] ^lfsr_reg[5] ^ lfsr_reg[4] ^lfsr_reg[3];
     
-    always_ff @(posedge clk or reset) begin
+    always_ff @(posedge clk) begin
         if (reset) begin
             lfsr_reg <= 8'b1000_0001;
             randout <= 2'b00;
