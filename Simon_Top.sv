@@ -109,9 +109,9 @@ module Simon_Top(
     .led_sequence() //read array
     );
     
-    //Simon_Talking u_talking(
+    Simon_Talking u_talking(
     //insert stuff here
-    //);
+    );
     
     Checking_Input u_checking(
     .clk(clk),
