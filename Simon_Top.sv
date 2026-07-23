@@ -20,11 +20,12 @@ module Simon_Top(
     
     output logic [2:0] led0_top, //LD 17
     output logic [2:0] led1_top, //LD 16
-    output logic [2:0] simon_led
+    output logic [2:0] simon_talking_top_led
     );
     
     //game control
     logic [2:0] game_state;
+    logic [4:0] current_level;
     
     //pregame
     logic pregame_start;
@@ -46,11 +47,13 @@ module Simon_Top(
     //Simon_Brain
     logic led_seq;
     
-    //clock divider for Simon Talking
+    //clock divider
     logic clock_div;
     
     //Simon Talking
-    logic current_level;
+    logic [4:0] talk_index;
+    logic [2:0] simon_led;
+    logic sequence_done;
     
     //Checking_Input
     logic check_index;
@@ -67,11 +70,12 @@ module Simon_Top(
     .clk(clk),
     .reset(reset),          
     .game_start(pregame_start),              //pregame
-    .sequence_done(),                   //simon_talking
-    .press_made(press_pulse),           //user_pressing
-    .press_correct(press_correct),      //checking input
-    .round_complete(round_complete),    //checking input
-    .game_state(game_state)  
+    .sequence_done(sequence_done),          //simon_talking
+    .press_made(press_pulse),               //user_pressing
+    .press_correct(press_correct),          //checking input
+    .round_complete(round_complete),        //checking input
+    .game_state(game_state),                //output
+    .current_level(current_level)           //output
     );
     
     Pregame u_pregame (
@@ -107,11 +111,18 @@ module Simon_Top(
     .led_randomizer_value(randout),
     .allow_write(allow_write),
     .curr_index(curr_index),
-    .led_sequence() //read array
+    .led_sequence(led_seq) //read array
     );
     
     Simon_Talking u_talking(
-    //insert stuff here
+    .clk(clk),
+    .clock_div(clock_div),
+    .reset(reset),
+    .led_seq(led_seq),
+    .current_level(current_level),
+    .talk_index(talk_index),
+    .simon_led(simon_led),
+    .sequence_done(sequence_done)
     );
     
     Checking_Input u_checking(
